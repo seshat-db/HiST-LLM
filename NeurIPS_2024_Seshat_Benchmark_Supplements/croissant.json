@@ -1,0 +1,1894 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "gpt-3",
+  "description": "Large Language Models (LLMs) have the potential to transform humanities and so-cial science research, yet their history knowledge and comprehension at a graduatelevel remains untested. Benchmarking LLMs in history is particularly challeng-ing, given that human knowledge of history is inherently unbalanced, with moreinformation available on Western history and recent periods. We introduce theHistory Seshat Test for LLMs (Hist-LLM), based on a subset of the Seshat GlobalHistory Databank, which provides a structured representation of human historicalknowledge, containing 36,000 data points across 600 historical societies and over2,700 scholarly references. This dataset covers every major world region from theNeolithic period to the Industrial Revolution and includes information reviewedand assembled by history experts and graduate research assistants. Using thisdataset, we benchmark a total of seven models from the Gemini, OpenAI, andLlama families. We find that, in a four-choice format, LLMs have a balanced accu-racy ranging from 33.6% (Llama-3.1-8B) to 46% (GPT-4-Turbo), outperformingrandom guessing (25%) but falling short of expert comprehension. LLMs performbetter on earlier historical periods. Regionally, performance is more even but stillbetter for the Americas and lowest in Oceania and Sub-Saharan Africa for themore advanced models. Our benchmark shows that while LLMs possess someexpert-level historical knowledge, there is considerable room for improvement.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "citeAs": "@article{hauser2024Hist-LLM, title={Large Language Models\u2019 Expert-level Global HistoryKnowledge Benchmark (HiST-LLM)}, author={Jakob Hauser, Daniel Kondor, Jenny Reddish, Majid Benam, Enrico Cioni, Federica Villa,  James S. Bennett, Daniel Hoyer, Pieter Francois, Peter Turchin, R. Maria del Rio-Chanona}, year={2024}}",
+  "url": "https://github.com/seshat-db/HiST-LLM",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "github-repository",
+      "name": "github-repository",
+      "description": "Seshat-db repository on GitHub.",
+      "contentUrl": "https://github.com/seshat-db/HiST-LLM",
+      "encodingFormat": "git+https",
+      "sha256": "main"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "main-files",
+      "name": "man-files",
+      "description": "Dataset and benchmarking results",
+      "containedIn": {
+        "@id": "github-repository"
+      },
+      "encodingFormat": "application/parquet",
+      "includes": "Neurips_HiST-LLM.parquet"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "ref-files",
+      "name": "ref-files",
+      "description": "References exported from the Seshat-DB Zotero can be matched with records in main-files via the Key column here and the ref_id column in main-files.",
+      "containedIn": {
+        "@id": "github-repository"
+      },
+      "encodingFormat": "application/parquet",
+      "includes": "references.parquet"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "main",
+      "name": "main",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "main/additional_review",
+          "name": "additional_review",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "additional_review"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/quote_ratio",
+          "name": "quote_ratio",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "quote_ratio"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/description",
+          "name": "description",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/id",
+          "name": "id",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/ref_id",
+          "name": "ref_id",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "ref_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/Q",
+          "name": "Q",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "Q"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/message",
+          "name": "message",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "message"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/g_message",
+          "name": "g_message",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "g_message"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/A",
+          "name": "A",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "A"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/polity_old_id",
+          "name": "polity_old_id",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "polity_old_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/start_year_str",
+          "name": "start_year_str",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "start_year_str"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/end_year_str",
+          "name": "end_year_str",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "end_year_str"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/start_year_int",
+          "name": "start_year_int",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "start_year_int"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/end_year_int",
+          "name": "end_year_int",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "end_year_int"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/name",
+          "name": "name",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/nga",
+          "name": "nga",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "nga"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/UN_region",
+          "name": "UN_region",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "UN_region"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/category",
+          "name": "category",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "category"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/root_cat",
+          "name": "root_cat",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "root_cat"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/value",
+          "name": "value",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/variable",
+          "name": "variable",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "variable"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/node_id",
+          "name": "node_id",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "node_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/pred_node_id",
+          "name": "pred_node_id",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "pred_node_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/root_cat_id",
+          "name": "root_cat_id",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "root_cat_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gpt-4-turbo-2024-04-09-full_response",
+          "name": "gpt-4-turbo-2024-04-09-full_response",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gpt-4-turbo-2024-04-09-full_response"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gpt-4-turbo-2024-04-09-answer",
+          "name": "gpt-4-turbo-2024-04-09-answer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gpt-4-turbo-2024-04-09-answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gpt-4-turbo-2024-04-09-system_fingerprint",
+          "name": "gpt-4-turbo-2024-04-09-system_fingerprint",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gpt-4-turbo-2024-04-09-system_fingerprint"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gpt-4o-2024-05-13-full_response",
+          "name": "gpt-4o-2024-05-13-full_response",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gpt-4o-2024-05-13-full_response"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gpt-4o-2024-05-13-answer",
+          "name": "gpt-4o-2024-05-13-answer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gpt-4o-2024-05-13-answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gpt-4o-2024-05-13-system_fingerprint",
+          "name": "gpt-4o-2024-05-13-system_fingerprint",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gpt-4o-2024-05-13-system_fingerprint"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gpt-3.5-turbo-0125-full_response",
+          "name": "gpt-3.5-turbo-0125-full_response",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gpt-3.5-turbo-0125-full_response"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gpt-3.5-turbo-0125-answer",
+          "name": "gpt-3.5-turbo-0125-answer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gpt-3.5-turbo-0125-answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gpt-3.5-turbo-0125-system_fingerprint",
+          "name": "gpt-3.5-turbo-0125-system_fingerprint",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gpt-3.5-turbo-0125-system_fingerprint"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-full_response",
+          "name": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-full_response",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-full_response"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-answer",
+          "name": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-answer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/meta-llama/Llama-3-70b-chat-hf-full_response",
+          "name": "meta-llama/Llama-3-70b-chat-hf-full_response",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "meta-llama/Llama-3-70b-chat-hf-full_response"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/meta-llama/Llama-3-70b-chat-hf-answer",
+          "name": "meta-llama/Llama-3-70b-chat-hf-answer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "meta-llama/Llama-3-70b-chat-hf-answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo-full_response",
+          "name": "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo-full_response",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo-full_response"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo-answer",
+          "name": "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo-answer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo-answer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gemini-1.5-flash-full_response",
+          "name": "gemini-1.5-flash-full_response",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gemini-1.5-flash-full_response"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "main/gemini-1.5-flash-answer",
+          "name": "gemini-1.5-flash-answer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "main-files"
+            },
+            "extract": {
+              "column": "gemini-1.5-flash-answer"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "ref",
+      "name": "ref",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Key",
+          "name": "Key",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Key"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Item Type",
+          "name": "Item Type",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Item Type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Publication Year",
+          "name": "Publication Year",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Publication Year"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Author",
+          "name": "Author",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Author"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Title",
+          "name": "Title",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Publication Title",
+          "name": "Publication Title",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Publication Title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/ISBN",
+          "name": "ISBN",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "ISBN"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/ISSN",
+          "name": "ISSN",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "ISSN"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/DOI",
+          "name": "DOI",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "DOI"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Url",
+          "name": "Url",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Abstract Note",
+          "name": "Abstract Note",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Abstract Note"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Date",
+          "name": "Date",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Date"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Date Added",
+          "name": "Date Added",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Date Added"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Date Modified",
+          "name": "Date Modified",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Date Modified"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Access Date",
+          "name": "Access Date",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Access Date"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Pages",
+          "name": "Pages",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Pages"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Num Pages",
+          "name": "Num Pages",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Num Pages"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Issue",
+          "name": "Issue",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Issue"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Volume",
+          "name": "Volume",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Volume"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Number Of Volumes",
+          "name": "Number Of Volumes",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Number Of Volumes"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Journal Abbreviation",
+          "name": "Journal Abbreviation",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Journal Abbreviation"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Short Title",
+          "name": "Short Title",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Short Title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Series",
+          "name": "Series",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Series"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Series Number",
+          "name": "Series Number",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Series Number"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Series Text",
+          "name": "Series Text",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Series Text"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Series Title",
+          "name": "Series Title",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Series Title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Publisher",
+          "name": "Publisher",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Publisher"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Place",
+          "name": "Place",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Place"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Language",
+          "name": "Language",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Language"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Rights",
+          "name": "Rights",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Rights"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Type",
+          "name": "Type",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Archive",
+          "name": "Archive",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Archive"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Archive Location",
+          "name": "Archive Location",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Archive Location"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Library Catalog",
+          "name": "Library Catalog",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Library Catalog"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Call Number",
+          "name": "Call Number",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Call Number"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Extra",
+          "name": "Extra",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Extra"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Notes",
+          "name": "Notes",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Notes"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/File Attachments",
+          "name": "File Attachments",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "File Attachments"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Link Attachments",
+          "name": "Link Attachments",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Link Attachments"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Manual Tags",
+          "name": "Manual Tags",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Manual Tags"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Automatic Tags",
+          "name": "Automatic Tags",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Automatic Tags"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Editor",
+          "name": "Editor",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Editor"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Series Editor",
+          "name": "Series Editor",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Series Editor"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Translator",
+          "name": "Translator",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Translator"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Contributor",
+          "name": "Contributor",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Contributor"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Attorney Agent",
+          "name": "Attorney Agent",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Attorney Agent"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Book Author",
+          "name": "Book Author",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Book Author"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Cast Member",
+          "name": "Cast Member",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Cast Member"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Commenter",
+          "name": "Commenter",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Commenter"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Composer",
+          "name": "Composer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Composer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Cosponsor",
+          "name": "Cosponsor",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Cosponsor"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Counsel",
+          "name": "Counsel",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Counsel"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Interviewer",
+          "name": "Interviewer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Interviewer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Producer",
+          "name": "Producer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Producer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Recipient",
+          "name": "Recipient",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Recipient"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Reviewed Author",
+          "name": "Reviewed Author",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Reviewed Author"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Scriptwriter",
+          "name": "Scriptwriter",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Scriptwriter"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Words By",
+          "name": "Words By",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Words By"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Guest",
+          "name": "Guest",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Guest"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Number",
+          "name": "Number",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Number"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Edition",
+          "name": "Edition",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Edition"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Running Time",
+          "name": "Running Time",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Running Time"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Scale",
+          "name": "Scale",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Scale"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Medium",
+          "name": "Medium",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Medium"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Artwork Size",
+          "name": "Artwork Size",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Artwork Size"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Filing Date",
+          "name": "Filing Date",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Filing Date"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Application Number",
+          "name": "Application Number",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Application Number"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Assignee",
+          "name": "Assignee",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Assignee"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Issuing Authority",
+          "name": "Issuing Authority",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Issuing Authority"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Country",
+          "name": "Country",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Country"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Meeting Name",
+          "name": "Meeting Name",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Meeting Name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Conference Name",
+          "name": "Conference Name",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Conference Name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Court",
+          "name": "Court",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Court"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/References",
+          "name": "References",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "References"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Reporter",
+          "name": "Reporter",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Reporter"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Legal Status",
+          "name": "Legal Status",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Legal Status"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Priority Numbers",
+          "name": "Priority Numbers",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Priority Numbers"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Programming Language",
+          "name": "Programming Language",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Programming Language"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Version",
+          "name": "Version",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Version"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/System",
+          "name": "System",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "System"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Code",
+          "name": "Code",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Code"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Code Number",
+          "name": "Code Number",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Code Number"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Section",
+          "name": "Section",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Section"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Session",
+          "name": "Session",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Session"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Committee",
+          "name": "Committee",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Committee"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/History",
+          "name": "History",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "History"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "ref/Legislative Body",
+          "name": "Legislative Body",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "ref-files"
+            },
+            "extract": {
+              "column": "Legislative Body"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+% Created 2024-10-31 Thu 11:49
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\date{}
+\title{Seshat Global History Databank Text Dataset and Benchmark of Large Language Models' History Knowledge}
+\hypersetup{
+ pdfauthor={Jakob Hauser},
+ pdftitle={Seshat Global History Databank Text Dataset and Benchmark of Large Language Models' History Knowledge},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.4 (Org mode 9.6.24)}, 
+ pdflang={English}}
+
+% Setup for code blocks [1/2]
+
+\usepackage{fvextra}
+
+\fvset{%
+  commandchars=\\\{\},
+  highlightcolor=white!95!black!80!blue,
+  breaklines=true,
+  breaksymbol=\color{white!60!black}\tiny\ensuremath{\hookrightarrow}}
+
+% Make line numbers smaller and grey.
+\renewcommand\theFancyVerbLine{\footnotesize\color{black!40!white}\arabic{FancyVerbLine}}
+
+\usepackage{xcolor}
+
+% In case engrave-faces-latex-gen-preamble has not been run.
+\providecolor{EfD}{HTML}{f7f7f7}
+\providecolor{EFD}{HTML}{28292e}
+
+% Define a Code environment to prettily wrap the fontified code.
+\usepackage[breakable,xparse]{tcolorbox}
+\DeclareTColorBox[]{Code}{o}%
+{colback=EfD!98!EFD, colframe=EfD!95!EFD,
+  fontupper=\footnotesize\setlength{\fboxsep}{0pt},
+  colupper=EFD,
+  IfNoValueTF={#1}%
+  {boxsep=2pt, arc=2.5pt, outer arc=2.5pt,
+    boxrule=0.5pt, left=2pt}%
+  {boxsep=2.5pt, arc=0pt, outer arc=0pt,
+    boxrule=0pt, leftrule=1.5pt, left=0.5pt},
+  right=2pt, top=1pt, bottom=0.5pt,
+  breakable}
+
+% Support listings with captions
+\usepackage{float}
+\floatstyle{plain}
+\newfloat{listing}{htbp}{lst}
+\newcommand{\listingsname}{Listing}
+\floatname{listing}{\listingsname}
+\newcommand{\listoflistingsname}{List of Listings}
+\providecommand{\listoflistings}{\listof{listing}{\listoflistingsname}}
+
+
+% Setup for code blocks [2/2]: syntax highlighting colors
+
+\newcommand\efstrut{\vrule height 2.1ex depth 0.8ex width 0pt}
+\definecolor{EFD}{HTML}{383a42}
+\definecolor{EfD}{HTML}{fafafa}
+\newcommand{\EFD}[1]{\textcolor{EFD}{#1}} % default
+\definecolor{EFh}{HTML}{9ca0a4}
+\newcommand{\EFh}[1]{\textcolor{EFh}{#1}} % shadow
+\definecolor{EFsc}{HTML}{50a14f}
+\newcommand{\EFsc}[1]{\textcolor{EFsc}{#1}} % success
+\definecolor{EFw}{HTML}{986801}
+\newcommand{\EFw}[1]{\textcolor{EFw}{#1}} % warning
+\definecolor{EFe}{HTML}{e45649}
+\newcommand{\EFe}[1]{\textcolor{EFe}{#1}} % error
+\definecolor{EFc}{HTML}{9ca0a4}
+\newcommand{\EFc}[1]{\textcolor{EFc}{#1}} % font-lock-comment-face
+\definecolor{EFcd}{HTML}{9ca0a4}
+\newcommand{\EFcd}[1]{\textcolor{EFcd}{#1}} % font-lock-comment-delimiter-face
+\definecolor{EFs}{HTML}{50a14f}
+\newcommand{\EFs}[1]{\textcolor{EFs}{#1}} % font-lock-string-face
+\definecolor{EFd}{HTML}{84888b}
+\newcommand{\EFd}[1]{\textcolor{EFd}{\textit{#1}}} % font-lock-doc-face
+\definecolor{EFm}{HTML}{b751b6}
+\newcommand{\EFm}[1]{\textcolor{EFm}{#1}} % font-lock-doc-markup-face
+\definecolor{EFk}{HTML}{e45649}
+\newcommand{\EFk}[1]{\textcolor{EFk}{#1}} % font-lock-keyword-face
+\definecolor{EFb}{HTML}{a626a4}
+\newcommand{\EFb}[1]{\textcolor{EFb}{#1}} % font-lock-builtin-face
+\definecolor{EFf}{HTML}{a626a4}
+\newcommand{\EFf}[1]{\textcolor{EFf}{#1}} % font-lock-function-name-face
+\definecolor{EFv}{HTML}{6a1868}
+\newcommand{\EFv}[1]{\textcolor{EFv}{#1}} % font-lock-variable-name-face
+\definecolor{EFt}{HTML}{986801}
+\newcommand{\EFt}[1]{\textcolor{EFt}{#1}} % font-lock-type-face
+\definecolor{EFo}{HTML}{b751b6}
+\newcommand{\EFo}[1]{\textcolor{EFo}{#1}} % font-lock-constant-face
+\definecolor{EFwr}{HTML}{986801}
+\newcommand{\EFwr}[1]{\textcolor{EFwr}{#1}} % font-lock-warning-face
+\definecolor{EFnc}{HTML}{4078f2}
+\newcommand{\EFnc}[1]{\textcolor{EFnc}{\textbf{#1}}} % font-lock-negation-char-face
+\definecolor{EFpp}{HTML}{4078f2}
+\newcommand{\EFpp}[1]{\textcolor{EFpp}{\textbf{#1}}} % font-lock-preprocessor-face
+\definecolor{EFrc}{HTML}{4078f2}
+\newcommand{\EFrc}[1]{\textcolor{EFrc}{\textbf{#1}}} % font-lock-regexp-grouping-construct
+\definecolor{EFrb}{HTML}{4078f2}
+\newcommand{\EFrb}[1]{\textcolor{EFrb}{\textbf{#1}}} % font-lock-regexp-grouping-backslash
+\definecolor{Efob}{HTML}{e7e7e7}
+\newcommand{\EFob}[1]{\colorbox{Efob}{\efstrut{}#1}} % org-block
+\definecolor{EFhn}{HTML}{da8548}
+\newcommand{\EFhn}[1]{\textcolor{EFhn}{\textbf{#1}}} % highlight-numbers-number
+\newcommand{\EFhq}[1]{#1} % highlight-quoted-quote
+\newcommand{\EFhs}[1]{#1} % highlight-quoted-symbol
+\newcommand{\EFrda}[1]{#1} % rainbow-delimiters-depth-1-face
+\newcommand{\EFrdb}[1]{#1} % rainbow-delimiters-depth-2-face
+\newcommand{\EFrdc}[1]{#1} % rainbow-delimiters-depth-3-face
+\newcommand{\EFrdd}[1]{#1} % rainbow-delimiters-depth-4-face
+\newcommand{\EFrde}[1]{#1} % rainbow-delimiters-depth-5-face
+\newcommand{\EFrdf}[1]{#1} % rainbow-delimiters-depth-6-face
+\newcommand{\EFrdg}[1]{#1} % rainbow-delimiters-depth-7-face
+\newcommand{\EFrdh}[1]{#1} % rainbow-delimiters-depth-8-face
+\newcommand{\EFrdi}[1]{#1} % rainbow-delimiters-depth-9-face
+\begin{document}
+
+\maketitle
+
+\section*{Dataset links}
+\label{sec:orgb6a6219}
+\href{https://github.com/seshat-db/HiST-LLM}{Dataset Repository (Github)} 
+\href{https://github.com/seshat-db/HiST-LLM/blob/main/croissant.json}{Croissant Metadata (Github)}
+\section*{Usage}
+\label{sec:orge15438e}
+This dataset can be used to benchmark LLMs on their expert level history knowledge.
+\section*{License/Responsiblity}
+\label{sec:org834fc93}
+This dataset is licensed under \href{https://creativecommons.org/licenses/by/4.0/}{CC by 4.0}.
+The authors bear all responsibility in case this dataset contains violations of rights.
+\section*{Dataset preservation/DOI}
+\label{sec:orgc0de9d3}
+Upon acceptance we will publish the dataset on \href{https://zenodo.org/}{Zenodo} with a respective DOI, as to ensure long term preservation of the dataset.
+\section*{Loading the dataset}
+\label{sec:org580605e}
+
+\begin{Code}
+\begin{Verbatim}
+\color{EFD}\EFk{import} pandas \EFk{as} pd
+\EFv{main} = pd.read\_parquet(\EFs{"Neurips\_HiST-LLM.parquet"})
+\EFv{ref} = pd.read\_parquet(\EFs{"references.parquet"})
+\end{Verbatim}
+\end{Code}
+\section*{Results reproduction}
+\label{sec:org87fb86b}
+\subsection*{Model APIs}
+\label{sec:org64e69d2}
+Model APIs were been queried using the \texttt{openai\_run\_batch.py} and \texttt{togetherai\_run.py} python scripts.
+
+\subsection*{Plots and Tables}
+\label{sec:orgc6178a3}
+Plots and Tables can be re-generated by running the \texttt{process\_res1.py}  script first then the other R and gnuplot scripts can be executed
+
+\section*{Dataset metadata}
+\label{sec:org4021998}
+Dataset metadata documented in the \texttt{croissant.json} file.
+
+\section*{Model Fingerprints}
+\label{sec:orgf28ff0e}
+When model fingerprint are available we created extra columns for each model fingerprint. These columns are named via the following pattern \texttt{<model-name>\_<model-fingerprint>}.
+
+\section*{Column Descriptions}
+\label{sec:org62df52a}
+\subsection*{Q}
+\label{sec:orge5cd282}
+The multiple choice question.
+\subsection*{A}
+\label{sec:org14f5f48}
+The expected completion of the prompt.
+\subsection*{polity old id}
+\label{sec:org9ec4902}
+ID for polity according to Seshat ids.
+\subsection*{start year str}
+\label{sec:org0561ed4}
+String for when polity started existing (in BCE/CE format).
+\subsection*{end year str}
+\label{sec:org937d4fb}
+String for when polity stopped existing (in BCE/CE format).
+\subsection*{start year int}
+\label{sec:org82c52b0}
+Int for when polity started existing (in BCE/CE format).
+\subsection*{end year int}
+\label{sec:orgb2d26c2}
+Int for when polity stopped existing (in BCE/CE format).
+\subsection*{name}
+\label{sec:orge1647f3}
+Polity name.
+\subsection*{nga}
+\label{sec:org62519a4}
+Natural Geographic Area for Polity.
+\subsection*{category}
+\label{sec:org9c0e955}
+Immediate parent category of fact from Seshat codebook.
+\subsection*{root cat}
+\label{sec:org933e1c9}
+Root category of fact from Seshat codebook.
+\subsection*{value}
+\label{sec:org4c2ad4b}
+Value of fact in Seshat.
+\subsection*{id}
+\label{sec:org38ec6f5}
+Request id for openai batch requests.
+\subsection*{region}
+\label{sec:orgcad9f31}
+World region for fact.
+\subsection*{description}
+\label{sec:org9e116af}
+Description provided by RAs for fact.
+\end{document}
