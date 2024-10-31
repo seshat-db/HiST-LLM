@@ -32,6 +32,9 @@ Dataset metadata documented in the =croissant.json= file.
 When model fingerprint are available we created extra columns for each model fingerprint. These columns are named via the following pattern =<model-name>_<model-fingerprint>=.
 
 * Column Descriptions
+** additional_review
+Boolean
+This column describes whether datapoints underwent additional expert review. See section 3.2 of the Paper.
 ** Q
   The multiple choice question.
 ** A
@@ -56,6 +59,8 @@ When model fingerprint are available we created extra columns for each model fin
   Root category of fact from Seshat codebook.
 ** value
   Value of fact in Seshat.
+** variable
+Variable of fact in Seshat.
 ** id
   Request id for openai batch requests.
 ** region
