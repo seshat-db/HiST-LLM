@@ -36,34 +36,34 @@ When model fingerprint are available we created extra columns for each model fin
 Boolean
 This column describes whether datapoints underwent additional expert review. See section 3.2 of the Paper.
 ** Q
-  The multiple choice question.
+The multiple choice question.
 ** A
-  The expected completion of the prompt.
+The expected completion of the prompt.
 ** polity old id
-  ID for polity according to Seshat ids.
+ID for polity according to Seshat ids.
 ** start year str
-  String for when polity started existing (in BCE/CE format).
+String for when polity started existing (in BCE/CE format).
 ** end year str
-  String for when polity stopped existing (in BCE/CE format).
+String for when polity stopped existing (in BCE/CE format).
 ** start year int
-  Int for when polity started existing (in BCE/CE format).
+Int for when polity started existing (in BCE/CE format).
 ** end year int
-  Int for when polity stopped existing (in BCE/CE format).
+Int for when polity stopped existing (in BCE/CE format).
 ** name
-  Polity name.
+Polity name.
 ** nga
-  Natural Geographic Area for Polity.
+Natural Geographic Area for Polity.
+** world_region
+The world region of a NGA (based on the UN regions with some modifications)
 ** category
-  Immediate parent category of fact from Seshat codebook.
+Immediate parent category of fact from Seshat codebook.
 ** root cat
-  Root category of fact from Seshat codebook.
+Major category of fact.
 ** value
-  Value of fact in Seshat.
+Value of data point.
 ** variable
-Variable of fact in Seshat.
+Variable of data point.
 ** id
-  Request id for openai batch requests.
-** region
-  World region for fact.
+Request id for openai batch requests.
 ** description
-  Description provided by RAs for fact.
+Description provided by RAs for fact.
