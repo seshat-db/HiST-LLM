@@ -1,4 +1,4 @@
-#+title: Seshat Global History Databank Text Dataset and Benchmark of Large Language Models' History Knowledge
+#+title: Large Language Models' Expert-level Global History Knowledge Benchmark (HiST-LLM)
 #+OPTIONS: author:nil date:nil
 
 * Dataset links
@@ -10,7 +10,8 @@ This dataset can be used to benchmark LLMs on their expert level history knowled
 This dataset is licensed under [[https://creativecommons.org/licenses/by/4.0/][CC by 4.0]].
 The authors bear all responsibility in case this dataset contains violations of rights.
 * Dataset preservation/DOI
-Upon acceptance we will publish the dataset on [[https://zenodo.org/][Zenodo]] with a respective DOI, as to ensure long term preservation of the dataset.
+https://zenodo.org/records/14671248
+https://doi.org/10.5281/zenodo.14671247
 * Loading the dataset
 using Python and Pandas:
 #+begin_src python :results output
