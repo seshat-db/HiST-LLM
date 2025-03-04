@@ -1,17 +1,15 @@
-from uuid import uuid4
 from openai import OpenAI
 import os
-from src.llm.prompts import guess_value, extract_value
 from dotenv import load_dotenv
-from src.utils import prompt_utils
-from src.utils.path_util import DATA_PATH
+
+from prompt_utils import gen_4_shot_examples, DATA_PATH
+
 from tqdm import tqdm
 import datetime
 import json
 import polars as pl
 
 load_dotenv()
-
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 seed = 42
@@ -21,14 +19,13 @@ model_names = [
     "gpt-3.5-turbo-0125",
 ]
 # model_names = ["gpt-4o-mini-2024-07-18"]
-task_names = ["guess_value", "extract_value"]
 
-task_name = task_names[0]
-request_dir = DATA_PATH / "rebuttal_runs" / "batch_requests"
-df = pl.read_parquet(DATA_PATH / "prompt_base.parquet")
+task_name = "guess_value"
+request_dir = DATA_PATH / "runs" / "batch_requests"
+df = pl.read_parquet("Neurips_HiST-LLM.parquet")
 
 batch_num = 1
-n_shot_dict = prompt_utils.gen_4_shot_examples()
+n_shot_dict = gen_4_shot_examples()
 
 for model_name in model_names:
     tasks = list()
@@ -51,7 +48,6 @@ for model_name in model_names:
 
         tasks.append(task)
 
-        # if ix % 10000 == 0 and ix > 0:
     batch_save_path = (
         request_dir
         / f'{task_name}_Batch-{batch_num}_{model_name}_{datetime.datetime.now().strftime("%Y-%m-%d-%H:%M:%S")}.jsonl'

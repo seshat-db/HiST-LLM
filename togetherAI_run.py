@@ -2,10 +2,10 @@
 import os, asyncio
 from together import AsyncTogether
 import aiofiles
-from datetime import datetime
 from typing import Any, AsyncIterator, Callable
 import json
 from pathlib import Path
+from prompt_utils import DATA_PATH
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -40,7 +40,6 @@ model_names = [
 ]
 model_name, model_dir, model_str = model_names[-3]
 
-DATA_PATH = Path("/home/scrappy/csh/Hapi/data")
 async_batch_size = 10
 
 
@@ -140,7 +139,7 @@ async def process_iterator(
 
 
 async def main():
-    task_df = pl.read_parquet(DATA_PATH / "prompt_base.parquet")
+    task_df = pl.read_parquet("Neurips_HiST-LLM.parquet")
 
     # async_client = AsyncTogether(api_key=os.environ.get("TOGETHER_API_KEY"))
     together_ai_path = DATA_PATH / "togetherai_runs" / model_dir
@@ -152,7 +151,7 @@ async def main():
         }
         if "finished" in checkpoint_dict.keys():
             checkpoint = checkpoint_dict["finished"]
-            print("you are finished dum dum")
+            print("you are finished")
             return None
         else:
             max_check = max([int(i) for i in checkpoint_dict.keys()])
